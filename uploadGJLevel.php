@@ -27,11 +27,11 @@ $levelName = $_POST["levelName"];
 $levelDesc = GDPS::base64url_encode($_POST["levelDesc"]);
 $levelString = $_POST["levelString"];
 $levelVersion = $_POST["levelVersion"];
-//$levelLength = $_POST["levelLength"];
+$levelLength = $_POST["levelLength"];
 $audioTrack = $_POST["audioTrack"];
 
 if ($levelID == 0) {
-    $query = $conn->prepare("INSERT INTO gjLevels (levelName, difficultyNumerator, officialSong, gameVersion, levelVersion, downloads, likes, description, userID, userName) VALUES ('$levelName', '0', '$audioTrack', '$gameVersion', '$levelVersion', '0', '0', '$levelDesc', '$userID', '$userName')");
+    $query = $conn->prepare("INSERT INTO gjLevels (levelName, difficultyNumerator, officialSong, gameVersion, levelVersion, downloads, likes, description, userID, userName, length) VALUES ('$levelName', '0', '$audioTrack', '$gameVersion', '$levelVersion', '0', '0', '$levelDesc', '$userID', '$userName', '$levelLength')");
     $query->execute();
 
     $query = $conn->prepare("SELECT * FROM gjLevels ORDER BY levelID DESC LIMIT 1");
@@ -43,8 +43,8 @@ if ($levelID == 0) {
     echo $newLevelID;
 } else {
     // Update the level
-    $query = $conn->prepare("UPDATE gjLevels SET levelVersion = :levelVersion WHERE levelID = :levelID");
-    $query->execute([":levelVersion" => $levelVersion, ":levelID" => $levelID]);
+    $query = $conn->prepare("UPDATE gjLevels SET levelVersion = :levelVersion, length = :length WHERE levelID = :levelID");
+    $query->execute(["levelVersion" => $levelVersion, "length" => $levelLength, "levelID" => $levelID]);
 
     file_put_contents("levels/$levelID", $levelString);
     echo $levelID;

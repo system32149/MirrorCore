@@ -113,7 +113,7 @@ foreach ($levelResult as $row) {
         $difficultyDenominator = 10;
     }
 
-    $levelObject .= "1:{$row["levelID"]}:2:{$row["levelName"]}:3:{$row["description"]}:5:{$row["levelVersion"]}:6:{$row["userID"]}:8:{$difficultyDenominator}:9:{$row["difficultyNumerator"]}:10:{$row["downloads"]}:11:0:12:{$row["officialSong"]}:13:{$row["gameVersion"]}:14:{$row["likes"]}:15:1|";
+    $levelObject .= "1:{$row["levelID"]}:2:{$row["levelName"]}:3:{$row["description"]}:5:{$row["levelVersion"]}:6:{$row["userID"]}:8:{$difficultyDenominator}:9:{$row["difficultyNumerator"]}:10:{$row["downloads"]}:11:0:12:{$row["officialSong"]}:13:{$row["gameVersion"]}:14:{$row["likes"]}:15:{$row["length"]}|";
     $creatorObject .= "{$row["userID"]}:{$row["userName"]}|";
 }
 $levelObject = substr($levelObject, 0, -1);
