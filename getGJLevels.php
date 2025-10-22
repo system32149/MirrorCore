@@ -1,5 +1,6 @@
 <?php
 include "incl/connection.php";
+include "config/config.php";
 
 // Secret
 if (!isset($_POST["secret"]) || $_POST["secret"] != "Wmfd2893gb7") {
@@ -91,10 +92,11 @@ if (empty($levelResult)) {
 }
 
 // Amount of levels
-$query = $conn->prepare("SELECT COUNT(*) FROM gjLevels $where $diffSql");
-$query->execute();
-$amountOfLevels = $query->fetchColumn();
-
+if ($realLevelCount) {
+    $query = $conn->prepare("SELECT COUNT(*) FROM gjLevels $where $diffSql");
+    $query->execute();
+    $amountOfLevels = $query->fetchColumn();
+}
 
 /**
  * Creating the response
@@ -117,8 +119,15 @@ foreach ($levelResult as $row) {
 $levelObject = substr($levelObject, 0, -1);
 $creatorObject = substr($creatorObject, 0, -1);
 
-// Creator & Page Object
-$response = "{$levelObject}#{$creatorObject}#".$amountOfLevels.":{$page}0:".count($levelResult);
+$response = "{$levelObject}#{$creatorObject}#";
+
+// Page Object
+if ($realLevelCount) {
+    $response .= $amountOfLevels;
+} else {
+    $response .= '9999';
+}
+$response .= ":{$page}0:".count($levelResult);
 
 echo $response;
 ?>
