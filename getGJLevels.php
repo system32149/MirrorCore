@@ -56,7 +56,7 @@ default:
 
 // SQL code for the difficulty filters
 $diffSql = null;
-if (isset($diff)) {
+if ($diff != "-") {
     $diffs = explode(",", $diff);
 
     if (isset($where)) {
