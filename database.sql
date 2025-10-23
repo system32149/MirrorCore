@@ -20,6 +20,7 @@ CREATE TABLE `gjLevels` (
       `officialSong` tinyint(2) NOT NULL,
       `downloads` mediumint(9) NOT NULL,
       `likes` mediumint(9) NOT NULL,
+      `length` tinyint(4) NOT NULL COMMENT 'Level length. 0 = tiny, 1 = short, 2 = medium, 3 = long',
       PRIMARY KEY (`levelID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci COMMENT='Contains level metadata (except for levelstrings)';
 
