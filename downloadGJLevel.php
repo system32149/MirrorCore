@@ -17,7 +17,7 @@ $levelID = $_POST["levelID"];
 // Xan was here.
 $query = $conn->prepare("SELECT * FROM gjLevels WHERE levelID = :levelID");
 $query->execute([":levelID" => $levelID]);
-$level = $query->fetchAll();
+$level = $query->fetch(PDO::FETCH_ASSOC);
 
 // Getting the levelString
 $path = "levels/$levelID";
@@ -28,7 +28,7 @@ if (file_exists($path)) {
 }
 
 // Level Object
-$response = "1:{$level[0]["levelID"]}:2:{$level[0]["levelName"]}:3:".GDPS::base64url_decode($level[0]["description"]).":4:$levelstring:5:{$level[0]["levelVersion"]}:6:{$level[0]["userID"]}:15:{$level[0]["length"]}";
+$response = "1:{$level["levelID"]}:2:{$level["levelName"]}:3:".GDPS::base64url_decode($level["description"]).":4:$levelstring:5:{$level["levelVersion"]}:6:{$level["userID"]}:15:{$level["length"]}";
 
 echo $response;
 ?>
