@@ -28,7 +28,7 @@ if (file_exists($path)) {
 }
 
 // Level Object
-$response = "1:{$level["levelID"]}:2:{$level["levelName"]}:3:".GDPS::base64url_decode($level["description"]).":4:$levelstring:5:{$level["levelVersion"]}:6:{$level["userID"]}:15:{$level["length"]}";
+$response = "1:{$level["levelID"]}:2:{$level["levelName"]}:3:".GDPS::base64url_decode($level["description"]).":4:$levelstring:5:{$level["levelVersion"]}:6:{$level["userID"]}:10:{$level["downloads"]}:14:{$level["likes"]}:15:{$level["length"]}";
 
 echo $response;
 ?>
